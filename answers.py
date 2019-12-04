@@ -166,6 +166,81 @@ def answer6_closest_path(wires):
     return min(lists[0].index(x) + lists[1].index(x) + 2 for x in intersections)
 
 
+def answer7():
+    total_correct_result = 0
+
+    for number in range(197487, 673251):
+        if answer7_rules(number):
+            total_correct_result += 1
+
+    return total_correct_result
+
+
+def answer7_rules(value):
+    digits = [int(x) for x in list(str(value))]
+
+    if len(digits) != 6:
+        return False
+
+    double = False
+    decreasing = False
+
+    previous = 0
+    for digit in digits:
+        if digit == previous:
+            double = True
+
+        if previous > digit:
+            decreasing = True
+
+        previous = digit
+
+    if not double:
+        return False
+
+    if decreasing:
+        return False
+
+    return True
+
+
+def answer8():
+    total_correct_result = 0
+
+    for number in range(197487, 673251):
+        if answer8_rules(number):
+            total_correct_result += 1
+
+    return total_correct_result
+
+
+def answer8_rules(value):
+    digits = [int(x) for x in list(str(value))]
+    digit_set = set(digits)
+    if not 2 in [
+        len(list(filter(lambda digit: digit == y, digits)))
+        for y in [x for x in digit_set]
+    ]:
+        return False
+
+    if len(digits) != 6:
+        return False
+
+    decreasing = False
+
+    previous = 0
+    for digit in digits:
+        if previous > digit:
+            decreasing = True
+
+        previous = digit
+
+    if decreasing:
+        return False
+
+    return True
+
+
 if __name__ == "__main__":
-    answer = answer6()
+    answer = answer8()
     print(answer)
