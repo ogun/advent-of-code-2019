@@ -4,18 +4,14 @@ import answers
 
 class TestAnswers(unittest.TestCase):
     def test_answer1(self):
-        tests = [(12, 2), (14, 2), (1969, 654), (100756, 33583)]
-
-        for value, expected in tests:
-            with self.subTest(value=value):
-                self.assertEqual(answers.answer1_get_fuel(value), expected)
+        actual = answers.answer1()
+        expected = 3415076
+        self.assertEqual(actual, expected)
 
     def test_answer2(self):
-        tests = [(14, 2), (1969, 966), (100756, 50346)]
-
-        for value, expected in tests:
-            with self.subTest(value=value):
-                self.assertEqual(answers.answer2_get_fuel(value), expected)
+        actual = answers.answer2()
+        expected = 5119745
+        self.assertEqual(actual, expected)
 
     def test_answer3(self):
         tests = [

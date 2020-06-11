@@ -1,35 +1,14 @@
 import math
 from data import problem1, problem3, problem6
+import aoc_2019
 
 
 def answer1():
-    total_fuel = 0
-    for mass in problem1.MODULES:
-        total_fuel += answer1_get_fuel(mass)
-
-    return total_fuel
-
-
-def answer1_get_fuel(mass):
-    return mass // 3 - 2
+    return aoc_2019.calculate_total_basic_fuel(problem1.MODULES)
 
 
 def answer2():
-    total_fuel = 0
-    for mass in problem1.MODULES:
-        total_fuel += answer2_get_fuel(mass)
-
-    return total_fuel
-
-
-def answer2_get_fuel(mass):
-    total_fuel = answer1_get_fuel(mass)
-
-    if total_fuel > 0:
-        total_fuel += answer2_get_fuel(total_fuel)
-        return total_fuel
-
-    return 0
+    return aoc_2019.calculate_total_fuel(problem1.MODULES)
 
 
 def answer3():
@@ -239,8 +218,3 @@ def answer8_rules(value):
         return False
 
     return True
-
-
-if __name__ == "__main__":
-    answer = answer8()
-    print(answer)
