@@ -17,30 +17,8 @@ def answer3():
     states[1] = 12
     states[2] = 2
 
-    final_state = answer3_execute(states)
+    final_state = aoc_2019.gravity_assist_program(states)
     return final_state[0]
-
-
-def answer3_execute(intcode):
-    instructions = {1: lambda x, y: x + y, 2: lambda x, y: x * y}
-
-    for idx in range(0, len(intcode), 4):
-        opcode = intcode[idx : idx + 4]
-        op = opcode[0]
-        if op == 99:
-            break
-
-        val1 = intcode[opcode[1]]
-        val2 = intcode[opcode[2]]
-        idx3 = opcode[3]
-
-        result = instructions[op](val1, val2)
-        if len(intcode) == idx3:
-            intcode.insert(result)
-        else:
-            intcode[idx3] = result
-
-    return intcode
 
 
 def answer4():

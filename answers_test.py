@@ -14,20 +14,9 @@ class TestAnswers(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_answer3(self):
-        tests = [
-            ([1, 0, 0, 0, 99], [2, 0, 0, 0, 99]),
-            (
-                [1, 9, 10, 3, 2, 3, 11, 0, 99, 30, 40, 50],
-                [3500, 9, 10, 70, 2, 3, 11, 0, 99, 30, 40, 50],
-            ),
-            ([2, 3, 0, 3, 99], [2, 3, 0, 6, 99]),
-            ([2, 4, 4, 5, 99, 0], [2, 4, 4, 5, 99, 9801]),
-            ([1, 1, 1, 4, 99, 5, 6, 0, 99], [30, 1, 1, 4, 2, 5, 6, 0, 99]),
-        ]
-
-        for value, expected in tests:
-            with self.subTest(value=value):
-                self.assertEqual(answers.answer3_execute(value), expected)
+        actual = answers.answer3()
+        expected = 5305097
+        self.assertEqual(actual, expected)
 
     def test_answer5(self):
         tests = [
