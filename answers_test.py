@@ -18,6 +18,11 @@ class TestAnswers(unittest.TestCase):
         expected = 5305097
         self.assertEqual(actual, expected)
 
+    def test_answer4(self):
+        actual = answers.answer4()
+        expected = 4925
+        self.assertEqual(actual, expected)
+
     def test_answer5(self):
         tests = [
             (["R8,U5,L5,D3", "U7,R6,D4,L4"], 6),

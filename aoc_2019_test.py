@@ -41,5 +41,5 @@ class TestAOC2019(unittest.TestCase):
 
         for value, expected in tests:
             with self.subTest(value=value):
-                actual = aoc_2019.gravity_assist_program(value)
+                actual = aoc_2019.intcode_program_internal(value)
                 self.assertEqual(actual, expected)

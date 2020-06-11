@@ -34,7 +34,18 @@ def calculate_total_fuel(module_mass_list):
     return total_fuel
 
 
-def gravity_assist_program(memory):
+def intcode_program(memory, noun, verb):
+    if noun:
+        memory[1] = noun
+
+    if verb:
+        memory[2] = verb
+
+    output = intcode_program_internal(memory)[0]
+    return output
+
+
+def intcode_program_internal(memory):
     instruction_pointer = 0
     memory_size = len(memory)
     while instruction_pointer < memory_size:

@@ -12,30 +12,21 @@ def answer2():
 
 
 def answer3():
-    states = problem3.STATES
-
-    states[1] = 12
-    states[2] = 2
-
-    final_state = aoc_2019.gravity_assist_program(states)
-    return final_state[0]
+    memory = problem3.MEMORY.copy()
+    return aoc_2019.intcode_program(memory, noun=12, verb=2)
 
 
 def answer4():
+    expected = 19690720
 
-    for x in range(100):
-        for y in range(100):
-            states = problem3.STATES.copy()
-            states[1] = x
-            states[2] = y
+    for noun in range(100):
+        for verb in range(100):
+            memory = problem3.MEMORY.copy()
+            actual = aoc_2019.intcode_program(memory, noun, verb)
+            if actual == expected:
+                return 100 * noun + verb
 
-            try:
-                if 19690720 == answer3_execute(states)[0]:
-                    return x, y
-            except:
-                continue
-
-    return 0
+    return 100 * noun + verb
 
 
 def answer5():
