@@ -34,53 +34,53 @@ def calculate_total_fuel(module_mass_list):
     return total_fuel
 
 
-def gravity_assist_program(initial_state):
-    idx = 0
-    state_length = len(initial_state)
-    while idx < state_length:
-        int_code = initial_state[idx]
-        opcode = __get_opcode(int_code)
+def gravity_assist_program(memory):
+    instruction_pointer = 0
+    memory_size = len(memory)
+    while instruction_pointer < memory_size:
+        opcode = memory[instruction_pointer]
+        instruction = __get_instruction(opcode)
 
-        if not opcode or not opcode["func"]:
-            return initial_state
+        if not instruction or not instruction["func"]:
+            return memory
 
-        idx += 1
-        args_count = opcode["args"]
-        opcode["func"](initial_state, *initial_state[idx : idx + args_count])
+        instruction_pointer += 1
+        param_count = instruction["param_count"]
+        instruction["func"](
+            memory, memory[instruction_pointer : instruction_pointer + param_count]
+        )
 
-        idx += args_count
+        instruction_pointer += param_count
 
-    return initial_state
+    return memory
 
 
-def __get_opcode(key):
-    code = [x for x in OPCODES if x["key"] == key]
-    if not code:
+def __get_instruction(opcode):
+    instructions = [x for x in INSTRUCTIONS if x["opcode"] == opcode]
+    if not instructions:
         return None
 
-    return code[0]
+    return instructions[0]
 
 
-def __intcode_one(*args):
-    arr = args[0]
-    pos_x = args[1]
-    pos_y = args[2]
-    pos_res = args[3]
+def __intcode_one(memory, params):
+    addr_x = params[0]
+    addr_y = params[1]
+    addr_res = params[2]
 
-    arr[pos_res] = arr[pos_x] + arr[pos_y]
-
-
-def __intcode_two(*args):
-    arr = args[0]
-    pos_x = args[1]
-    pos_y = args[2]
-    pos_res = args[3]
-
-    arr[pos_res] = arr[pos_x] * arr[pos_y]
+    memory[addr_res] = memory[addr_x] + memory[addr_y]
 
 
-OPCODES = [
-    {"key": 1, "args": 3, "func": __intcode_one},
-    {"key": 2, "args": 3, "func": __intcode_two},
-    {"key": 99, "args": 0, "func": None},
+def __intcode_two(memory, params):
+    addr_x = params[0]
+    addr_y = params[1]
+    addr_res = params[2]
+
+    memory[addr_res] = memory[addr_x] * memory[addr_y]
+
+
+INSTRUCTIONS = [
+    {"opcode": 1, "param_count": 3, "func": __intcode_one},
+    {"opcode": 2, "param_count": 3, "func": __intcode_two},
+    {"opcode": 99, "param_count": 0, "func": None},
 ]
