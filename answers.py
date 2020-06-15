@@ -30,88 +30,11 @@ def answer4():
 
 
 def answer5():
-    return answer5_closest_intersection(problem6.WIRES)
-
-
-def answer5_closest_intersection(wires):
-    sets = []
-
-    for wire in wires:
-        paths = wire.split(",")
-
-        new_set = set()
-        current_x = 0
-        current_y = 0
-        for path in paths:
-            direction = path[0:1]
-            step = int(path[1:])
-            if direction == "U":
-                for i in range(current_y + 1, current_y + step + 1):
-                    current_y = i
-                    new_set.add((current_x, current_y))
-            elif direction == "D":
-                for i in range(current_y - 1, current_y - (step + 1), -1):
-                    current_y = i
-                    new_set.add((current_x, i))
-            elif direction == "R":
-                for i in range(current_x + 1, current_x + step + 1):
-                    current_x = i
-                    new_set.add((current_x, current_y))
-            elif direction == "L":
-                for i in range(current_x - 1, current_x - (step + 1), -1):
-                    current_x = i
-                    new_set.add((current_x, current_y))
-        sets.append(new_set)
-
-    intersections = sets[0].intersection(sets[1])
-
-    return min(abs(x[0]) + abs(x[1]) for x in intersections)
+    return aoc_2019.calculate_intersection_manhattan_distance(problem6.WIRES)
 
 
 def answer6():
-    return answer6_closest_path(problem6.WIRES)
-
-
-def answer6_closest_path(wires):
-    sets = []
-    lists = []
-
-    for wire in wires:
-        paths = wire.split(",")
-
-        new_set = set()
-        new_list = list()
-        current_x = 0
-        current_y = 0
-        for path in paths:
-            direction = path[0:1]
-            step = int(path[1:])
-            if direction == "U":
-                for i in range(current_y + 1, current_y + step + 1):
-                    current_y = i
-                    new_set.add((current_x, current_y))
-                    new_list.append((current_x, current_y))
-            elif direction == "D":
-                for i in range(current_y - 1, current_y - (step + 1), -1):
-                    current_y = i
-                    new_set.add((current_x, i))
-                    new_list.append((current_x, i))
-            elif direction == "R":
-                for i in range(current_x + 1, current_x + step + 1):
-                    current_x = i
-                    new_set.add((current_x, current_y))
-                    new_list.append((current_x, current_y))
-            elif direction == "L":
-                for i in range(current_x - 1, current_x - (step + 1), -1):
-                    current_x = i
-                    new_set.add((current_x, current_y))
-                    new_list.append((current_x, current_y))
-        sets.append(new_set)
-        lists.append(new_list)
-
-    intersections = sets[0].intersection(sets[1])
-
-    return min(lists[0].index(x) + lists[1].index(x) + 2 for x in intersections)
+    return aoc_2019.calculate_intersection_fewest_combined_step(problem6.WIRES)
 
 
 def answer7():
